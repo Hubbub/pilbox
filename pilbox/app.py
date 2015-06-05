@@ -241,6 +241,7 @@ class ImageHandler(tornado.web.RequestHandler):
         return image.save(**opts)
 
     def _set_headers(self, headers, file_format):
+        self.set_header("Cache-Control", "public, max-age=31536000")
         if file_format and any((self.get_argument("fmt"),
                                 self.settings.get("format"),
                                 self.settings.get("content_type_from_image"))):
